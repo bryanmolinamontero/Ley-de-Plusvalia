@@ -31,7 +31,7 @@ public class JFmain extends javax.swing.JFrame {
         txt_valorMejoras.setHorizontalAlignment(SwingConstants.RIGHT);
         txt_valorContribucionesEspeciales.setHorizontalAlignment(SwingConstants.RIGHT);
         txt_valorVenta.setHorizontalAlignment(SwingConstants.RIGHT);
-        
+
         panel_paso1.setVisible(false);
         panel_paso2.setVisible(false);
         panel_paso3.setVisible(false);
@@ -636,7 +636,7 @@ public class JFmain extends javax.swing.JFrame {
         jPanel4.setVisible(true);
         panel_paso2.setVisible(false);
         panel_paso3.setVisible(false);
-        
+
     }//GEN-LAST:event_btn_calcularActionPerformed
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
@@ -649,17 +649,16 @@ public class JFmain extends javax.swing.JFrame {
     private void btn_paso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_paso2ActionPerformed
         // TODO add your handling code here:
         BigDecimal valor_totalBien = new BigDecimal(txt_paso1.getText());
-        
         Double valorFactorAjuste = obtenerFactorDeAjuste(Double.parseDouble(txt_tiempoAnios.getText()), Double.parseDouble(txt_tiempoMeses.getText()));
 
         txt_paso2_ValorBien.setText(txt_paso1.getText());
-        txt_paso2_FA.setText("" + valorFactorAjuste );
-        
+        txt_paso2_FA.setText("" + valorFactorAjuste);
+
         BigDecimal valor_totalBienConInteres = new BigDecimal(BigInteger.ZERO);
         valor_totalBienConInteres = valor_totalBien.multiply(new BigDecimal(valorFactorAjuste));
 
         valor_totalBienConInteres = valor_totalBienConInteres.setScale(2, BigDecimal.ROUND_HALF_UP);
-        
+
         lbl_paso2.setText("" + valor_totalBienConInteres);
         panel_paso2.setVisible(true);
     }//GEN-LAST:event_btn_paso2ActionPerformed
@@ -671,28 +670,32 @@ public class JFmain extends javax.swing.JFrame {
         BigDecimal valor_paso3 = new BigDecimal(BigInteger.ZERO);
         valor_paso3 = valor_paso3.add(new BigDecimal(txt_paso3_ValorBienConIntereses.getText()));
         valor_paso3 = valor_paso3.add(new BigDecimal(txt_paso3_FranjaExenta.getText()));
-        lbl_paso3.setText(""+ valor_paso3);
-        
+        lbl_paso3.setText("" + valor_paso3);
+
         txt_paso3_valorVenta.setText(txt_valorVenta.getText());
         txt_paso3_gananciaOrdinaria.setText(lbl_paso3.getText());
         Double valorExtra = Double.parseDouble(txt_paso3_valorVenta.getText()) - Double.parseDouble(txt_paso3_gananciaOrdinaria.getText());
-        
+
         lbl_paso3_valorExtra.setText("" + round(valorExtra, 2));
         valorExtra = valorExtra * 0.75;
         lbl_paso3_impuestoTOTAL.setText("" + round(valorExtra, 2));
-        
-        if(valorExtra < 0 ) lbl_paso3_impuestoTOTAL.setText("0");
+
+        if (valorExtra < 0) {
+            lbl_paso3_impuestoTOTAL.setText("0");
+        }
         panel_paso3.setVisible(true);
     }//GEN-LAST:event_btn_paso3ActionPerformed
 
     public static double round(Double value, int places) {
-    if (places < 0) throw new IllegalArgumentException();
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
 
-    long factor = (long) Math.pow(10, places);
-    value = value * factor;
-    long tmp = Math.round(value);
-    return (double) tmp / factor;
-}
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 
     private Double obtenerFactorDeAjuste(Double anios, Double meses) {
         Double valor_TasaBCE = Double.parseDouble(txt_TasaPasivaBCE.getText());
