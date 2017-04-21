@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 /**
  *
+ * 
  * @author Bryan Molina M
  */
 public class JFmain extends javax.swing.JFrame {
