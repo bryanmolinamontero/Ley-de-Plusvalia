@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 /**
- *
  * 
  * @author Bryan Molina M
  */
@@ -626,6 +625,12 @@ public class JFmain extends javax.swing.JFrame {
 
     private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         // TODO add your handling code here:
+        
+        if(txt_valorVenta.getText().equalsIgnoreCase("") || txt_valorVenta.getText().equalsIgnoreCase("0") ){
+            JOptionPane.showMessageDialog(null, "Ingrese valor de venta");
+            return;
+        }
+        
         BigDecimal valor_compra = new BigDecimal(txt_valorCosto.getText());
         BigDecimal valor_mejoras = new BigDecimal(txt_valorMejoras.getText());
         BigDecimal valor_contribucionesEspeciales = new BigDecimal(txt_valorContribucionesEspeciales.getText());
